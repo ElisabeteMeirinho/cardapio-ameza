@@ -61,13 +61,25 @@ nav a:hover{color:var(--gold-soft)!important}
 .hero-home h1 em{font-style:italic;color:var(--gold-soft)}
 .hero-home p{max-width:570px;font-size:15px!important;line-height:1.85!important;color:rgba(251,247,239,.82)!important}
 .hero-home .btn{margin-top:12px;min-width:205px}
-.hero-art{position:relative;z-index:1;min-height:350px;display:grid;place-items:center}
-.hero-orbit{position:absolute;width:min(34vw,360px);height:min(34vw,360px);border:1px solid rgba(232,221,201,.62);border-radius:50%;box-shadow:0 0 0 18px rgba(232,221,201,.035),0 0 0 42px rgba(232,221,201,.025)}
-.hero-plate{position:relative;width:min(27vw,280px);height:min(27vw,280px);border-radius:50%;border:13px solid rgba(251,247,239,.92);background:radial-gradient(circle at 50% 45%,#E8DDC9 0 39%,#F8F3E9 40% 53%,#D9CBB7 54% 57%,#FBF7EF 58% 67%,#D7C8B1 68% 71%,#F8F3E9 72%);box-shadow:0 28px 70px rgba(0,0,0,.25);display:grid;place-items:center;transform:rotate(-8deg)}
-.plate-food{width:56%;height:42%;border-radius:48% 45% 50% 42%;background:linear-gradient(135deg,#B96F4C 0 23%,#D59A5D 24% 54%,#587D50 55% 67%,#E7D6B7 68%);filter:drop-shadow(0 8px 8px rgba(60,44,24,.24));transform:rotate(17deg)}
-.plate-leaf{position:absolute;z-index:1;width:54px;height:92px;border:2px solid var(--green-soft);border-radius:100% 0 100% 0;transform:rotate(31deg) translate(18px,-52px);background:linear-gradient(135deg,rgba(84,116,95,.8),rgba(199,173,117,.2))}
-.hero-art-note{position:absolute;bottom:0;right:0;display:flex;flex-direction:column;gap:3px;color:var(--gold-soft);text-align:right;letter-spacing:.18em;font:500 12px 'Montserrat',sans-serif}
-.hero-art-note small{font:500 8px 'Montserrat',sans-serif;color:rgba(251,247,239,.7);letter-spacing:.13em}
+.hero-home{
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  align-items:stretch;
+  gap:34px;
+  min-height:500px;
+  padding:54px 0 54px 62px!important;
+}
+.hero-copy{align-self:center;max-width:620px;padding:0 12px 0 0}
+.hero-home h1{font-size:clamp(42px,4.65vw,64px)!important;line-height:1.07!important;max-width:620px}
+.hero-home p{max-width:560px;font-size:14px!important;line-height:1.9!important}
+.hero-photo{
+  position:relative;isolation:isolate;align-self:stretch;min-width:0;min-height:500px;
+  margin:-54px 0 -54px 0;overflow:hidden;border-radius:0 26px 26px 0;background:#1b3b2d;
+}
+.hero-photo img{display:block;width:100%;height:100%;min-height:500px;object-fit:cover;object-position:58% 50%;filter:saturate(.88) contrast(1.02)}
+.hero-photo-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,43,33,.30) 0%,rgba(13,43,33,.02) 36%,rgba(13,43,33,.04) 100%),linear-gradient(0deg,rgba(13,43,33,.50),transparent 32%);pointer-events:none}
+.hero-photo::after{content:"";position:absolute;width:76%;aspect-ratio:1;right:-13%;top:10%;border:1px solid rgba(232,221,201,.48);border-radius:50%;box-shadow:0 0 0 18px rgba(232,221,201,.035),0 0 0 40px rgba(232,221,201,.025);pointer-events:none}
+.hero-photo-caption{position:absolute;z-index:1;right:34px;bottom:26px;display:flex;flex-direction:column;gap:3px;color:var(--paper);text-align:right;letter-spacing:.18em;font:500 12px 'Montserrat',sans-serif;text-shadow:0 2px 10px rgba(0,0,0,.35)}
+.hero-photo-caption small{font:500 8px 'Montserrat',sans-serif;color:rgba(251,247,239,.85);letter-spacing:.13em}
 #estabelecimentos{padding:26px 0}
 #estabelecimentos .section-head{margin-bottom:18px}
 #estabelecimentos h2,.section-head h2{font-size:clamp(28px,3vw,38px)!important;font-weight:500!important;color:var(--green)}
@@ -109,8 +121,9 @@ footer,.foot{color:var(--muted)!important;border-top:1px solid var(--line);paddi
 @media(max-width:900px){
   .top{flex-wrap:wrap!important}
   .brand-logo{width:220px}
-  .hero-home{grid-template-columns:1fr minmax(240px,.8fr);gap:20px;min-height:430px}
-  .hero-plate{width:230px;height:230px}.hero-orbit{width:300px;height:300px}
+  .hero-home{grid-template-columns:minmax(0,.9fr) minmax(230px,.85fr);gap:22px;min-height:420px;padding:40px 0 40px 38px!important}
+  .hero-photo{min-height:420px;margin:-40px 0;border-radius:0 20px 20px 0}
+  .hero-photo img{min-height:420px}
 }
 @media(max-width:650px){
   .top{padding:13px 17px!important;min-height:auto}
@@ -118,13 +131,12 @@ footer,.foot{color:var(--muted)!important;border-top:1px solid var(--line);paddi
   nav{gap:10px!important;width:100%;justify-content:flex-start}
   nav a,.top nav a{font-size:10px!important;padding:6px 1px!important}
   .wrap{padding:24px 16px 55px!important}
-  .hero-home{grid-template-columns:1fr;gap:12px;padding:38px 24px!important;min-height:unset}
+  .hero-home{grid-template-columns:1fr;gap:22px;padding:34px 22px 0!important;min-height:unset}
   .hero-home h1{font-size:42px!important}
   .hero-home p{font-size:13px!important}
-  .hero-art{min-height:250px}
-  .hero-plate{width:190px;height:190px;border-width:9px}
-  .hero-orbit{width:250px;height:250px}
-  .hero-art-note{bottom:-2px;right:0}
+  .hero-photo{height:290px;min-height:290px;margin:0 -22px 0;border-radius:0 0 20px 0}
+  .hero-photo img{height:290px;min-height:290px;object-position:58% 50%}
+  .hero-photo-caption{right:20px;bottom:17px}
   .hero-store,.partner-page .hero,.admin-page .hero,.dashboard-page .hero{padding:28px 22px!important}
   .panel{padding:19px!important}
   .restaurant-card{padding:18px!important}
