@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 210" role="img" aria-labelledby="title desc">
+<title id="title">AMEZA — Cardápios Inclusivos</title><desc id="desc">Versão verde do símbolo botânico e nome AMEZA, para fundos claros.</desc>
+<g fill="none" stroke="#163C30" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M28 166C5 96 48 25 113 19"/><path d="M34 164C65 135 96 92 131 42"/>
+<path d="M52 143C32 124 22 104 30 88C50 90 64 108 59 132"/><path d="M75 112C55 91 53 70 67 56C86 68 91 88 81 106"/>
+<path d="M98 80C87 55 94 35 114 27C126 47 121 67 105 82"/><path d="M61 135C80 137 98 127 104 109C85 101 67 112 61 135"/><path d="M83 104C104 106 120 95 126 77C107 70 89 82 83 104"/>
+</g>
+<text x="188" y="125" fill="#163C30" font-family="Cormorant Garamond, Georgia, serif" font-size="100" letter-spacing="9">AMEZA</text>
+<text x="194" y="169" fill="#53685B" font-family="Montserrat, Arial, sans-serif" font-size="20" letter-spacing="7">CARDÁPIOS INCLUSIVOS</text>
+<path d="M194 190H577" stroke="#B69B62" stroke-width="2"/>
+</svg>
