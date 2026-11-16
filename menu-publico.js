@@ -29,9 +29,9 @@ function render() {
     const message = \`Olá! Encontrei o cardápio do \${window.AMEZA_RESTAURANT_NAME}. Gostaria de saber mais sobre: \${product.name}. Poderia confirmar ingredientes e cuidados de preparo?\`;
     const whatsapp = phone ? \`https://wa.me/\${phone}?text=\${encodeURIComponent(message)}\` : '';
     const tags = [
-      product.milkFree ? '<span class="pill">Declarado sem leite e derivados</span>' : '',
-      product.lactoseFree ? '<span class="pill">Declarado sem lactose</span>' : '',
-      product.glutenFree ? '<span class="pill">Declarado sem glúten</span>' : ''
+      product.milkFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-milk.svg" alt="">Declarado sem leite e derivados</span>' : '',
+      product.lactoseFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-lactose.svg" alt="">Declarado sem lactose</span>' : '',
+      product.glutenFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-gluten.svg" alt="">Declarado sem glúten</span>' : ''
     ].filter(Boolean).join('');
     return \`<article class="menu-card">
       <div class="menu-card-head"><h3>\${escapeHtml(product.name)}</h3><strong>\${money(product.price)}</strong></div>
