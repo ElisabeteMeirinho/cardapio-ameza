@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Painel do restaurante | AMEZA</title>
+  <link rel="stylesheet" href="operacao.css">
+  <script src="config.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script type="module" src="operacao.js"></script>
+</head>
+<body data-operacao="restaurante">
+  <header><div class="top">
+    <a class="brand" href="index.html">AMEZA<small>PAINEL DO ESTABELECIMENTO</small></a>
+    <nav><a href="index.html">Ver cardápios</a><a href="empresa.html">Parceria</a><a href="gestao.html">Administração</a></nav>
+  </div></header>
+  <main>
+    <section class="hero"><div class="eyebrow">ÁREA DO RESTAURANTE</div><h1>Seu cardápio, do seu jeito.</h1><p>Cadastre os pratos, informe os ingredientes e publique as opções que deseja mostrar aos consumidores.</p></section>
+    <div class="warning">Versão inicial em piloto. As informações são declarações do estabelecimento, não uma certificação. Antes de divulgar, revise ingredientes, alergênicos, preparo e contato cruzado.</div>
+    <section class="panel">
+      <h2>Acesso do restaurante</h2>
+      <p id="session" class="muted">Conectando…</p>
+      <form id="signin"><div class="grid"><div class="field"><label>E-mail<input name="email" type="email" autocomplete="username" required></label></div><div class="field"><label>Senha<input name="password" type="password" autocomplete="current-password" required></label></div></div><button type="submit">Entrar</button></form>
+      <button id="signout" class="secondary hidden" type="button">Sair</button>
+      <p id="notice" aria-live="polite"></p>
+      <p class="muted">Ainda não tem parceria? <a href="empresa.html">Solicite seu cadastro por aqui.</a></p>
+    </section>
+    <div id="workspace" class="hidden">
+      <section class="panel" id="public-menu-panel">
+        <h2>Seu cardápio público</h2>
+        <p class="muted">Compartilhe este link ou o QR Code com seus clientes. Somente os pratos publicados aparecem para o público.</p>
+        <div class="public-link-row"><input id="public-menu-url" readonly aria-label="Link público do cardápio"><button id="copy-menu-link" type="button" class="secondary">Copiar link</button></div>
+        <div class="qr-layout"><div id="menu-qr" aria-label="QR Code do cardápio"></div><div><strong>QR Code do seu cardápio</strong><p class="muted">Aponte a câmera do celular para abrir o cardápio público.</p><button id="download-qr" type="button" class="secondary">Baixar QR Code</button></div></div>
+      </section>
+      <section class="panel">
+        <div class="topline"><h2>Meus pratos</h2><span id="product-total" class="muted"></span></div>
+        <div id="products"></div>
+      </section>
+      <section class="panel">
+        <h2 id="form-title">Cadastrar prato</h2>
+        <form id="product-form">
+          <input type="hidden" name="productId" id="product-id">
+          <div class="grid">
+            <div class="field"><label>Nome do prato<input name="name" maxlength="100" required></label></div>
+            <div class="field"><label>Preço (R$)<input name="price" type="number" min="0.01" max="9999" step="0.01" required></label></div>
+          </div>
+          <div class="field"><label>Ingredientes completos<textarea name="ingredients" maxlength="1500" placeholder="Inclua ingredientes de molhos, temperos e produtos industrializados." required></textarea></label></div>
+          <div class="field"><label>Alergênicos presentes e cuidados de preparo<textarea name="warnings" maxlength="1000" placeholder="Informe alergênicos presentes, possíveis traços e risco de contato cruzado. Se não souber, não declare ausência." required></textarea></label></div>
+          <h3>Declarações alimentares</h3>
+          <p class="muted">Marque somente quando o estabelecimento puder sustentar a declaração, considerando os ingredientes e os procedimentos reais de preparo.</p>
+          <div class="choices">
+            <label><input type="checkbox" name="milk"> Declarado sem leite e derivados (proteínas do leite)</label>
+            <label><input type="checkbox" name="lactose"> Declarado sem lactose</label>
+            <label><input type="checkbox" name="gluten"> Declarado sem glúten, com cuidados para doença celíaca</label>
+          </div>
+          <div class="field"><label>Adaptações possíveis (opcional)<textarea name="adaptations" maxlength="700" placeholder="Ex.: molho servido à parte, somente se viável no preparo."></textarea></label></div>
+          <div class="notice">“Sem leite”, “sem lactose” e “sem glúten” não são equivalentes. Retirar um ingrediente não garante ausência de alergênicos ou contato cruzado.</div>
+          <div class="actions"><button id="save-product" type="submit">Salvar prato</button><button id="cancel-edit" type="button" class="secondary hidden">Cancelar edição</button></div>
+        </form>
+      </section>
+    </div>
+  </main>
+  <footer>AMEZA · Área exclusiva do estabelecimento</footer>
+</body>
+</html>
