@@ -178,3 +178,10 @@ footer,.foot{color:var(--muted)!important;border-top:1px solid var(--line);paddi
   .restaurant-card{padding:18px!important}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important}}
+
+/* Iconografia alimentar individual, com o mesmo traço da marca. */
+.filter-list .check{display:inline-flex;align-items:center;gap:9px}
+.filter-list .check .dietary-icon{width:26px;height:26px;flex:0 0 26px;object-fit:contain}
+.filter-list .check input{margin:0 1px 0 0}
+.dietary-pill{display:inline-flex;align-items:center;gap:7px;white-space:normal;line-height:1.35}
+.dietary-pill img{width:23px;height:23px;flex:0 0 23px;object-fit:contain}
