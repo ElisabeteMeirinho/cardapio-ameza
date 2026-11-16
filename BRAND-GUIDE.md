@@ -16,10 +16,12 @@ O site deve ser predominantemente verde floresta, com áreas de leitura em marfi
 - Títulos e chamadas: Playfair Display (fallback Georgia).
 - Navegação, formulários e textos de interface: Montserrat (fallback Arial).
 
-## Arquivos de logo
-- `assets/ameza-logo-horizontal.svg`: versão principal clara para fundos verdes.
-- `assets/ameza-logo-clara.svg`: versão verde para fundos claros.
-- `assets/ameza-simbolo.svg`: símbolo isolado para favicon, app e pequenos espaços.
+## Arquivos oficiais de logo — referência aprovada em 16/11/2026
+A imagem enviada e aprovada pela proprietária da marca é a fonte mestre. O fundo verde foi removido apenas para permitir aplicação sobre os fundos do site; desenho, ramo, arco, tipografia e proporções foram preservados.
+- `assets/ameza-logo-oficial.png`: logo horizontal oficial, em marfim e champagne, com transparência, para fundos verde-floresta.
+- `assets/ameza-simbolo-oficial.png`: recorte do símbolo da mesma logo, para favicon, ícone e espaços pequenos.
+
+**Importante:** não redesenhar a logo com outra fonte, trocar o ramo, fechar/alterar o arco nem substituir a marca por ornamentos. Os SVGs anteriores são versões de estudo e não devem ser usados no site. Para aplicações em fundo claro, preferir a versão principal sobre uma placa verde-floresta até ser aprovada uma versão clara específica.
 
 ## Regras de aplicação
 - Preservar proporções e espaço de respiro.
