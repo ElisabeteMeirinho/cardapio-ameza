@@ -1,0 +1,12 @@
+.restaurant-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.restaurant-card{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+.restaurant-card h3{font:700 22px Georgia,serif;margin:2px 0 7px}.restaurant-card p{margin:6px 0 12px;color:var(--muted);font-size:13px}
+.logo-mark{width:50px;height:50px;flex:0 0 50px;border-radius:15px;background:var(--green);color:#fff;display:grid;place-items:center;font:700 28px Georgia,serif}
+.restaurant-card-copy{min-width:0}.restaurant-card .eyebrow{color:var(--terra);font-size:10px}
+.empty-state{background:#fff;border:1px dashed var(--line);border-radius:15px;padding:24px;text-align:center;color:var(--muted)}
+.back-link{display:inline-block;margin:0 0 15px;font-size:13px;font-weight:750;color:var(--green2)}
+.filter-list{display:flex;gap:8px;flex-wrap:wrap}.menu-products{display:grid;gap:14px}
+.menu-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.menu-card h3{font:700 22px Georgia,serif;margin:0}
+.menu-card p{margin:9px 0;font-size:13px;color:#455c53;overflow-wrap:anywhere}.menu-card .menu-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.menu-card .menu-card-head strong{white-space:nowrap;color:var(--terra);font-size:18px}.menu-card .btn{margin-top:8px}.note{font-size:12px;color:var(--muted)}
+@media(max-width:720px){.restaurant-grid{grid-template-columns:1fr}.restaurant-card{padding:16px}.menu-card{padding:17px}.menu-card .menu-card-head{flex-direction:column;gap:4px}}
