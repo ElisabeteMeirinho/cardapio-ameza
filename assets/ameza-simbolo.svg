@@ -1,11 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 220" role="img" aria-labelledby="title desc">
-<title id="title">Símbolo AMEZA</title><desc id="desc">Arco botânico minimalista em marfim com ramo de folhas, para ícone.</desc>
-<rect width="220" height="220" rx="38" fill="#163C30"/>
-<g fill="none" stroke="#E8DDC9" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M40 166C18 95 63 28 128 23"/><path d="M44 166C81 131 119 82 157 35"/>
-<path d="M65 145C42 125 34 103 45 84C66 91 77 112 70 135"/>
-<path d="M91 116C69 94 70 70 87 56C106 72 108 96 98 113"/>
-<path d="M121 78C109 52 118 32 138 25C151 48 143 66 128 82"/>
-<path d="M75 145C98 148 118 134 123 113C101 105 82 121 75 145"/>
-<path d="M103 110C127 112 146 98 153 77C132 71 111 88 103 110"/>
+<title id="title">Símbolo AMEZA</title><desc id="desc">Ramo botânico delicado dentro de um arco circular aberto, em marfim sobre verde floresta.</desc>
+<rect width="220" height="220" rx="36" fill="#163C30"/>
+<g fill="none" stroke="#E8DDC9" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M46 176C12 137 13 72 58 31C91 0 146 9 175 42C190 59 196 80 191 101"/>
+  <path d="M45 176C83 144 124 94 168 35"/>
+  <path d="M62 158C42 154 35 136 45 120C64 123 76 139 68 155"/>
+  <path d="M82 137C60 125 57 105 70 90C89 100 96 120 88 136"/>
+  <path d="M102 113C83 96 84 75 100 62C118 76 121 96 109 113"/>
+  <path d="M124 84C111 62 119 43 138 36C151 56 145 74 130 87"/>
+  <path d="M148 56C144 36 157 21 176 23C181 44 168 58 151 62"/>
+  <path d="M70 155C91 162 113 151 118 132C98 124 78 136 70 155"/>
+  <path d="M92 129C115 133 135 120 139 100C119 93 99 108 92 129"/>
 </g></svg>
