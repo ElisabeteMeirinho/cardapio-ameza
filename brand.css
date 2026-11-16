@@ -94,7 +94,13 @@ nav a:hover{color:var(--gold-soft)!important}
   display:grid;grid-template-columns:minmax(260px,.9fr) minmax(0,1.1fr);align-items:stretch;
   margin:44px 0 18px;background:var(--cream);border:1px solid var(--line);overflow:hidden;
 }
-.partner-cta-photo{min-height:250px;background:linear-gradient(0deg,rgba(13,43,33,.12),rgba(13,43,33,.12)),url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80') center 54%/cover no-repeat}
+.partner-cta-mark{min-height:250px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 75% 22%,rgba(199,173,117,.14),transparent 30%),linear-gradient(135deg,var(--green-deep),var(--green));color:var(--paper)}
+.partner-cta-mark::before,.partner-cta-mark::after{content:"";position:absolute;width:230px;height:230px;border:1px solid rgba(232,221,201,.22);border-radius:50%}
+.partner-cta-mark::before{left:-105px;top:-115px}.partner-cta-mark::after{right:-125px;bottom:-150px}
+.partner-mark-leaf{font:400 74px Georgia,serif;color:var(--gold-soft);line-height:1}
+.partner-cta-mark strong{font:500 54px 'Playfair Display',Georgia,serif;letter-spacing:.12em}
+.partner-cta-mark small{font:500 9px 'Montserrat',Arial,sans-serif;letter-spacing:.28em;color:var(--beige)}
+.partner-mark-line{width:120px;height:1px;background:var(--gold);margin-top:18px}
 .partner-cta-copy{padding:34px 38px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
 .partner-cta-copy .eyebrow{color:#9B8352}
 .partner-cta-copy h2{font-size:clamp(28px,3vw,40px)!important;line-height:1.12;margin:7px 0 12px!important;font-weight:500!important}
@@ -166,7 +172,8 @@ footer,.foot{color:var(--muted)!important;border-top:1px solid var(--line);paddi
   .feature-item:nth-child(odd){border-right:1px solid var(--line)}
   .feature-item:nth-last-child(-n+2){border-bottom:0}
   .partner-cta{grid-template-columns:1fr}
-  .partner-cta-photo{min-height:190px}
+  .partner-cta-mark{min-height:180px}
+  .partner-cta-mark strong{font-size:45px}
   .partner-cta-copy{padding:25px 22px}
   .hero-store,.partner-page .hero,.admin-page .hero,.dashboard-page .hero{padding:28px 22px!important}
   .panel{padding:19px!important}
