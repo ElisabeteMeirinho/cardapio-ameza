@@ -185,3 +185,25 @@ footer,.foot{color:var(--muted)!important;border-top:1px solid var(--line);paddi
 .filter-list .check input{margin:0 1px 0 0}
 .dietary-pill{display:inline-flex;align-items:center;gap:7px;white-space:normal;line-height:1.35}
 .dietary-pill img{width:23px;height:23px;flex:0 0 23px;object-fit:contain}
+
+
+/* Mobile header contrast and navigation containment */
+header{
+  background:#0D2B21!important;
+  opacity:1!important;
+  isolation:isolate;
+  z-index:50!important;
+}
+header .top{background:transparent!important}
+header nav{
+  flex-wrap:nowrap!important;
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  scrollbar-width:none;
+}
+header nav::-webkit-scrollbar{display:none}
+header nav a{
+  flex:0 0 auto;
+  white-space:nowrap;
+}
