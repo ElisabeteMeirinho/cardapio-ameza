@@ -347,3 +347,132 @@ header .top{background:#0D2B21!important}
   header .top{background:#0D2B21!important}
   .partner-cta-mark img{width:min(100%,320px)!important;max-width:320px!important;max-height:88px!important}
 }
+
+
+/* Revisão final AMEZA — fidelidade à prancha aprovada e mobile */
+header{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  width:100%;
+  background:#0D2B21!important;
+  opacity:1!important;
+  isolation:isolate!important;
+  box-shadow:0 5px 20px rgba(0,0,0,.13)!important;
+}
+header .top{background:#0D2B21!important}
+.brand-logo{
+  display:block!important;
+  width:230px!important;
+  max-width:100%!important;
+  height:auto!important;
+  max-height:64px!important;
+  object-fit:contain!important;
+}
+.feature-strip{align-items:stretch}
+.feature-item{min-width:0}
+.feature-icon{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:56px!important;
+  height:56px!important;
+  flex:0 0 56px!important;
+}
+.feature-icon img{
+  display:block!important;
+  width:54px!important;
+  height:54px!important;
+  object-fit:contain!important;
+}
+.partner-cta-mark{
+  position:relative!important;
+  isolation:isolate;
+  min-height:280px!important;
+  padding:0!important;
+  overflow:hidden!important;
+  background:var(--green)!important;
+}
+.partner-cta-mark::before,.partner-cta-mark::after{display:none!important}
+.partner-cta-mark img.partner-photo{
+  position:absolute!important;
+  inset:0!important;
+  z-index:1;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  max-width:none!important;
+  max-height:none!important;
+  object-fit:cover!important;
+  object-position:center!important;
+  padding:0!important;
+}
+.filter-list .check .dietary-icon{
+  display:inline-block;
+  width:30px!important;
+  height:30px!important;
+  flex:0 0 30px!important;
+  object-fit:contain!important;
+}
+.dietary-pill img{
+  width:25px!important;
+  height:25px!important;
+  flex:0 0 25px!important;
+  object-fit:contain!important;
+}
+@media(max-width:900px){
+  .brand-logo{width:210px!important;max-height:58px!important}
+}
+@media(max-width:650px){
+  header{background:#0D2B21!important}
+  header .top{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:flex-start!important;
+    justify-content:center!important;
+    gap:6px!important;
+    width:100%!important;
+    min-height:0!important;
+    padding:10px 14px!important;
+    background:#0D2B21!important;
+  }
+  .brand{min-width:0!important;width:auto!important}
+  .brand-logo{width:184px!important;max-width:78vw!important;max-height:52px!important}
+  header nav,.top nav{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    align-items:center!important;
+    justify-content:space-between!important;
+    gap:9px!important;
+    width:100%!important;
+    max-width:100%!important;
+    overflow-x:auto!important;
+    white-space:nowrap!important;
+    scrollbar-width:none;
+  }
+  header nav::-webkit-scrollbar,.top nav::-webkit-scrollbar{display:none}
+  header nav a,.top nav a{
+    display:inline-flex!important;
+    flex:0 0 auto!important;
+    white-space:nowrap!important;
+    font-size:10px!important;
+    line-height:1.25!important;
+    padding:5px 0!important;
+  }
+  .wrap{padding:20px 14px 50px!important}
+  .feature-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .feature-item{
+    gap:9px!important;
+    padding:14px 10px!important;
+    min-width:0!important;
+  }
+  .feature-icon{width:44px!important;height:44px!important;flex:0 0 44px!important}
+  .feature-icon img{width:42px!important;height:42px!important}
+  .feature-item strong{font-size:14px!important;line-height:1.25!important}
+  .feature-item small{font-size:10px!important;line-height:1.4!important}
+  .partner-cta{grid-template-columns:1fr!important}
+  .partner-cta-mark{min-height:220px!important}
+  .partner-cta-mark img.partner-photo{min-height:220px!important}
+}
