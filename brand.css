@@ -104,6 +104,13 @@ nav a:hover{color:var(--gold-soft)!important}
 .partner-cta-copy h2{font-size:clamp(28px,3vw,40px)!important;line-height:1.12;margin:7px 0 12px!important;font-weight:500!important}
 .partner-cta-copy p{color:var(--muted);max-width:520px;font-size:13px;line-height:1.8}
 .partner-cta-copy .btn{margin-top:9px}
+.partner-cta-eyebrow{display:flex;align-items:center;gap:10px}
+.partner-cta-eyebrow img{display:block;width:30px;height:30px;object-fit:contain}
+.partner-cta-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px 18px;margin-top:12px}
+.partner-cta-actions .btn{margin-top:0}
+.partner-login-link{font-size:12px;font-weight:700;color:var(--green);text-decoration:underline;text-decoration-color:rgba(23,60,49,.35);text-underline-offset:4px}
+.partner-login-link:hover,.partner-login-link:focus-visible{color:var(--terra);text-decoration-color:currentColor}
+@media(max-width:650px){.partner-cta-actions{align-items:flex-start;gap:14px}.partner-cta-copy{padding:26px 22px}}
 
 #estabelecimentos{padding:26px 0}
 #estabelecimentos .section-head{margin-bottom:18px}
