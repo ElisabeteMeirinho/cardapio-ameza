@@ -27,17 +27,17 @@ if (!config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !config?.project
 function render() {
   const term = ($('search').value || '').trim().toLocaleLowerCase('pt-BR');
   const filtered = restaurants.filter((restaurant) => String(restaurant.businessName || '').toLocaleLowerCase('pt-BR').includes(term));
-  $('directory-count').textContent = \`\${filtered.length} estabelecimento(s)\`;
-  list.innerHTML = filtered.length ? filtered.map((restaurant) => \`
+  $('directory-count').textContent = `${filtered.length} estabelecimento(s)`;
+  list.innerHTML = filtered.length ? filtered.map((restaurant) => `
     <article class="restaurant-card">
-      <div class="logo-mark" aria-hidden="true"><img src="assets/ameza-simbolo-oficial.png?v=1" alt=""></div>
+      <div class="logo-mark" aria-hidden="true"><img src="assets/brand/ameza-simbolo.webp?v=2" alt=""></div>
       <div class="restaurant-card-copy">
         <p class="eyebrow">CARDÁPIO PARCEIRO</p>
-        <h3>\${escapeHtml(restaurant.businessName)}</h3>
+        <h3>${escapeHtml(restaurant.businessName)}</h3>
         <p>Consulte os pratos, ingredientes e informações alimentares declaradas por este estabelecimento.</p>
-        <a class="btn primary" href="menu.html?loja=\${encodeURIComponent(restaurant.id)}">Ver cardápio →</a>
+        <a class="btn primary" href="menu.html?loja=${encodeURIComponent(restaurant.id)}">Ver cardápio →</a>
       </div>
-    </article>\`).join('') : '<div class="empty-state">Nenhum estabelecimento publicado por aqui ainda. Volte em breve!</div>';
+    </article>`).join('') : '<div class="empty-state">Nenhum estabelecimento publicado por aqui ainda. Volte em breve!</div>';
 }
 
 $('search').addEventListener('input', render);
