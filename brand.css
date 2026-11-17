@@ -207,3 +207,52 @@ header nav a{
   flex:0 0 auto;
   white-space:nowrap;
 }
+
+
+/* Revisão visual AMEZA — ativos aprovados e cabeçalho mobile */
+header{
+  position:sticky!important;
+  top:0!important;
+  z-index:1000!important;
+  width:100%;
+  background:#0D2B21!important;
+  opacity:1!important;
+  isolation:isolate;
+  box-shadow:0 5px 20px rgba(0,0,0,.13)!important;
+}
+header .top{position:relative;z-index:1}
+.feature-icon img{width:54px;height:54px;object-fit:contain}
+.partner-cta-mark{padding:0!important;background:var(--cream)!important;min-height:250px}
+.partner-cta-mark::before,.partner-cta-mark::after{display:none!important}
+.partner-cta-mark img.partner-photo{
+  position:absolute;inset:0;z-index:1;display:block;
+  width:100%;height:100%;max-height:none;object-fit:cover;
+}
+.filter-list .check .dietary-icon{width:30px;height:30px;flex:0 0 30px;object-fit:contain}
+.dietary-pill img{width:24px;height:24px;flex:0 0 24px;object-fit:contain}
+@media(max-width:650px){
+  header{background:#0D2B21!important}
+  .top{
+    display:flex!important;flex-direction:column!important;
+    align-items:flex-start!important;justify-content:center!important;
+    gap:5px!important;padding:10px 15px!important;min-height:0!important;
+  }
+  .brand{min-width:0!important}
+  .brand-logo{width:190px!important;max-height:52px!important;height:auto!important}
+  .top nav{
+    display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+    align-items:center!important;justify-content:space-between!important;
+    width:100%!important;gap:9px!important;overflow-x:auto!important;
+    padding:2px 0 4px!important;scrollbar-width:none;
+  }
+  .top nav::-webkit-scrollbar{display:none}
+  .top nav a,.top nav a:visited{
+    flex:0 0 auto!important;white-space:nowrap!important;
+    font-size:10px!important;line-height:1.3!important;
+    padding:5px 0!important;
+  }
+  .partner-cta-mark{min-height:210px!important}
+  .partner-cta-mark img.partner-photo{min-height:210px}
+  .feature-icon{width:46px;height:46px;flex:0 0 46px}
+  .feature-icon img{width:46px;height:46px}
+}
