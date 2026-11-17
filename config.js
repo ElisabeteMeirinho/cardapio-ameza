@@ -1,12 +1,13 @@
 // AMEZA — configuração pública do Firebase Web.
-// Crie um projeto Firebase EXCLUSIVO para a AMEZA e preencha os campos.
-// Não reutilize o projeto institucional Inclusão Alimentar.
-// Não inclua senhas, service accounts nem credenciais administrativas.
+// Projeto Firebase exclusivo da AMEZA: ameza-376c8.
+// Os valores abaixo identificam o app Web e não são senhas nem credenciais administrativas.
+// Nunca inclua service accounts, private keys ou tokens privados neste arquivo.
 window.AMEZA_FIREBASE_CONFIG = {
-  apiKey: 'PREENCHA_API_KEY',
-  authDomain: 'PREENCHA_AUTH_DOMAIN',
-  projectId: 'PREENCHA_PROJECT_ID',
-  storageBucket: 'PREENCHA_STORAGE_BUCKET',
-  messagingSenderId: 'PREENCHA_MESSAGING_SENDER_ID',
-  appId: 'PREENCHA_APP_ID'
+  apiKey: "AIzaSyAkqb-Hq8kczx-U7pzKR-y9-XaMUSJupso",
+  authDomain: "ameza-376c8.firebaseapp.com",
+  projectId: "ameza-376c8",
+  storageBucket: "ameza-376c8.firebasestorage.app",
+  messagingSenderId: "742632688763",
+  appId: "1:742632688763:web:30db9e8b7bd1c6032366de",
+  measurementId: "G-XZ0GKNPQH8"
 };
