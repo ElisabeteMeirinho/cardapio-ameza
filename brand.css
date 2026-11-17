@@ -476,3 +476,29 @@ header .top{background:#0D2B21!important}
   .partner-cta-mark{min-height:220px!important}
   .partner-cta-mark img.partner-photo{min-height:220px!important}
 }
+
+
+/* Correção de carregamento — marca e fotografia aprovadas */
+header{background:#0D2B21!important;opacity:1!important;isolation:isolate;z-index:1000!important}
+.brand-logo{display:block!important;width:242px!important;max-width:100%!important;height:auto!important;max-height:66px!important;object-fit:contain!important;opacity:1!important;visibility:visible!important}
+.hero-photo{position:relative!important;isolation:isolate;overflow:hidden!important;background:#163C30!important}
+.hero-photo>img{
+  position:absolute!important;inset:0!important;z-index:0!important;
+  display:block!important;width:100%!important;height:100%!important;min-height:100%!important;
+  object-fit:cover!important;object-position:58% 50%!important;
+  opacity:1!important;visibility:visible!important;
+}
+.hero-photo .hero-photo-shade{z-index:1!important}
+.hero-photo::after{z-index:2!important}
+.hero-photo .hero-photo-caption{z-index:3!important}
+.partner-cta-mark{position:relative!important;overflow:hidden!important;background:#163C30!important}
+.partner-cta-mark img.partner-photo{
+  position:absolute!important;inset:0!important;z-index:0!important;
+  display:block!important;width:100%!important;height:100%!important;max-height:none!important;
+  object-fit:cover!important;opacity:1!important;visibility:visible!important;
+}
+@media(max-width:650px){
+ .brand-logo{width:205px!important;max-height:58px!important}
+ .hero-photo{height:290px!important;min-height:290px!important}
+ .hero-photo>img{height:290px!important;min-height:290px!important}
+}
