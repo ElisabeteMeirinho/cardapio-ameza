@@ -31,7 +31,7 @@ function render() {
   $('directory-count').textContent = `${filtered.length} estabelecimento(s)`;
   list.innerHTML = filtered.length ? filtered.map((restaurant) => `
     <article class="restaurant-card">
-      <div class="logo-mark" aria-hidden="true"><img src="assets/brand/ameza-simbolo.webp?v=2" alt=""></div>
+      <div class="logo-mark" aria-hidden="true"><img src="assets/ameza-simbolo-oficial.png?v=2" alt=""></div>
       <div class="restaurant-card-copy">
         <p class="eyebrow">CARDÁPIO PARCEIRO</p>
         <h3>${escapeHtml(restaurant.businessName)}</h3>
