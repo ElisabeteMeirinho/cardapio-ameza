@@ -48,23 +48,39 @@ if (!list) {
   );
 } else {
   setDirectoryMessage('<p class="muted">Carregando estabelecimentos…</p>', 'Carregando…');
+  let loadTimer;
+  let loadTimedOut = false;
   try {
-    const [{ initializeApp }, { getFirestore, collection, getDocs, query, where }] = await Promise.all([
-      import('https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js'),
-      import('https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js')
-    ]);
-    const app = initializeApp(config, 'ameza-public-directory');
-    const db = getFirestore(app);
-    const snapshot = await getDocs(query(collection(db, 'publicRestaurants'), where('active', '==', true)));
-    restaurants = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
-      .sort((a, b) => String(a.businessName || '').localeCompare(String(b.businessName || ''), 'pt-BR'));
-    render();
+    const loadCatalog = (async () => {
+      const [{ initializeApp }, { getFirestore, collection, getDocs, query, where }] = await Promise.all([
+        import('https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js'),
+        import('https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js')
+      ]);
+      const app = initializeApp(config, 'ameza-public-directory');
+      const db = getFirestore(app);
+      const snapshot = await getDocs(query(collection(db, 'publicRestaurants'), where('active', '==', true)));
+      if (loadTimedOut) return;
+      restaurants = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        .sort((a, b) => String(a.businessName || '').localeCompare(String(b.businessName || ''), 'pt-BR'));
+      render();
+    })();
+    const timeout = new Promise((_, reject) => {
+      loadTimer = window.setTimeout(() => {
+        loadTimedOut = true;
+        reject(new Error('Tempo limite de 12 segundos excedido ao consultar o catálogo.'));
+      }, 12000);
+    });
+    await Promise.race([loadCatalog, timeout]);
   } catch (error) {
     console.error('AMEZA: falha ao carregar o catálogo.', error);
     setDirectoryMessage(
-      '<div class="notice danger">Não foi possível carregar os estabelecimentos. Confira a conexão do Firebase e as permissões de leitura do catálogo.</div>',
-      'Indisponível'
+      loadTimedOut
+        ? '<div class="notice danger">A conexão está demorando para responder. Confira sua internet e tente novamente.</div>'
+        : '<div class="notice danger">Não foi possível carregar os estabelecimentos. Confira a conexão do Firebase e as permissões de leitura do catálogo.</div>',
+      loadTimedOut ? 'Tempo esgotado' : 'Indisponível'
     );
+  } finally {
+    window.clearTimeout(loadTimer);
   }
 }
 
