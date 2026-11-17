@@ -8,7 +8,8 @@ const list = $('directory');
 let restaurants = [];
 
 if (!config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !config?.projectId || config.projectId.startsWith('PREENCHA_')) {
-  list.innerHTML = '<div class="notice danger">A conexão do catálogo ainda não foi configurada.</div>';
+  $('directory-count').textContent = 'Configuração pendente';
+  list.innerHTML = '<div class="notice danger">A conexão do catálogo ainda não foi configurada. Os estabelecimentos aparecerão aqui depois que o Firebase próprio da AMEZA for conectado.</div>';
 } else {
   try {
     const app = initializeApp(config);
