@@ -256,3 +256,60 @@ header .top{position:relative;z-index:1}
   .feature-icon{width:46px;height:46px;flex:0 0 46px}
   .feature-icon img{width:46px;height:46px}
 }
+
+
+/* Correção final de responsividade e camadas do cabeçalho AMEZA */
+header{
+  position:sticky!important;
+  top:0!important;
+  z-index:100!important;
+  background:#0D2B21!important;
+  opacity:1!important;
+  isolation:isolate;
+  backdrop-filter:none!important;
+}
+header .top{background:#0D2B21!important}
+.feature-icon img{width:46px;height:46px;object-fit:contain}
+.partner-cta-mark img{width:min(76%,330px);max-height:118px;object-fit:contain}
+@media(max-width:650px){
+  header{background:#0D2B21!important}
+  .top{
+    min-height:0!important;
+    padding:10px 14px 11px!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:center!important;
+    gap:8px!important;
+    background:#0D2B21!important;
+  }
+  .brand{min-width:0!important;width:auto!important;justify-content:center}
+  .brand-logo{width:184px!important;max-width:80vw!important;max-height:50px!important}
+  nav{
+    display:flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap!important;
+    justify-content:space-between!important;
+    align-items:center!important;
+    gap:clamp(6px,2vw,12px)!important;
+    width:100%!important;
+    overflow-x:auto!important;
+    white-space:nowrap!important;
+    scrollbar-width:none;
+  }
+  nav::-webkit-scrollbar{display:none}
+  nav a,.top nav a{
+    flex:0 0 auto!important;
+    font-size:clamp(9px,2.75vw,11px)!important;
+    line-height:1.2!important;
+    padding:5px 0!important;
+    white-space:nowrap!important;
+  }
+  .wrap{padding:20px 14px 48px!important}
+  .feature-item{gap:9px!important;padding:14px 10px!important}
+  .feature-icon{width:38px!important;height:38px!important;flex-basis:38px!important}
+  .feature-icon img{width:36px!important;height:36px!important}
+  .feature-item strong{font-size:14px!important;line-height:1.25!important}
+  .feature-item small{font-size:10px!important}
+  .partner-cta-mark{min-height:170px!important}
+  .partner-cta-mark img{width:min(72%,260px)!important;max-height:100px!important}
+}
