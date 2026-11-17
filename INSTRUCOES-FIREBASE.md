@@ -9,7 +9,7 @@ Crie um projeto novo no Firebase Console, exclusivo para a AMEZA. Não reutilize
 3. Habilite Authentication com e-mail e senha.
 4. Crie o Firestore Database.
 5. Revise `firestore.rules` antes de publicar as regras.
-6. Em Authentication > Settings > Authorized domains, adicione o domínio de hospedagem (por exemplo, `cardapioameza.com.br`) após configurar o DNS.
+6. Em Authentication > Settings > Authorized domains, confirme que `elisabetemeirinho.github.io` está na lista (é o domínio usado pelo GitHub Pages). Se a AMEZA passar a usar um domínio próprio, adicione também apenas o domínio configurado e validado no DNS.
 
 ## Conta administradora
 1. Crie e confirme uma conta pelo fluxo de estabelecimento.
