@@ -313,3 +313,28 @@ header .top{background:#0D2B21!important}
   .partner-cta-mark{min-height:170px!important}
   .partner-cta-mark img{width:min(72%,260px)!important;max-height:100px!important}
 }
+
+/* AMEZA — biblioteca aprovada de ícones individuais */
+.feature-icon img{
+  width:44px!important;
+  height:44px!important;
+  object-fit:contain!important;
+}
+.logo-mark img{
+  width:84%!important;
+  height:84%!important;
+  object-fit:contain!important;
+  padding:5px;
+}
+.partner-cta-mark img{
+  width:min(80%,410px)!important;
+  max-width:410px!important;
+  max-height:112px!important;
+  object-fit:contain!important;
+  image-rendering:auto;
+}
+@media(max-width:650px){
+  .partner-cta-mark img{width:min(82%,360px)!important;max-height:95px!important}
+  .feature-icon{width:42px;height:42px;flex-basis:42px}
+  .feature-icon img{width:42px!important;height:42px!important}
+}
