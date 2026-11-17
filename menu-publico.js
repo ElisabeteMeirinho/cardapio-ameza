@@ -11,7 +11,7 @@ let products = [];
 
 function normalizePhone(value) {
   let digits = String(value || '').replace(/\D/g, '');
-  if (digits.length === 10 || digits.length === 11) digits = \`55\${digits}\`;
+  if (digits.length === 10 || digits.length === 11) digits = `55${digits}`;
   return digits;
 }
 
@@ -19,28 +19,28 @@ function render() {
   const term = ($('search').value || '').trim().toLocaleLowerCase('pt-BR');
   const selectedFilters = [...document.querySelectorAll('.filter-list input:checked')].map((input) => input.value);
   const visible = products.filter((product) => {
-    const matchesText = !term || \`\${product.name || ''} \${product.ingredients || ''}\`.toLocaleLowerCase('pt-BR').includes(term);
+    const matchesText = !term || `${product.name || ''} ${product.ingredients || ''}`.toLocaleLowerCase('pt-BR').includes(term);
     const matchesFilters = selectedFilters.every((field) => product[field] === true);
     return matchesText && matchesFilters;
   });
-  $('product-count').textContent = \`\${visible.length} prato(s)\`;
+  $('product-count').textContent = `${visible.length} prato(s)`;
   productsBox.innerHTML = visible.length ? visible.map((product) => {
     const phone = normalizePhone(window.AMEZA_RESTAURANT_PHONE);
-    const message = \`Olá! Encontrei o cardápio do \${window.AMEZA_RESTAURANT_NAME}. Gostaria de saber mais sobre: \${product.name}. Poderia confirmar ingredientes e cuidados de preparo?\`;
-    const whatsapp = phone ? \`https://wa.me/\${phone}?text=\${encodeURIComponent(message)}\` : '';
+    const message = `Olá! Encontrei o cardápio do ${window.AMEZA_RESTAURANT_NAME}. Gostaria de saber mais sobre: ${product.name}. Poderia confirmar ingredientes e cuidados de preparo?`;
+    const whatsapp = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}` : '';
     const tags = [
-      product.milkFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-milk.svg" alt="">Declarado sem leite e derivados</span>' : '',
-      product.lactoseFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-lactose.svg" alt="">Declarado sem lactose</span>' : '',
-      product.glutenFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-gluten.svg" alt="">Declarado sem glúten</span>' : ''
+      product.milkFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-leite.webp" alt="">Declarado sem leite e derivados</span>' : '',
+      product.lactoseFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-leite.webp" alt="">Declarado sem lactose</span>' : '',
+      product.glutenFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-gluten.webp" alt="">Declarado sem glúten</span>' : ''
     ].filter(Boolean).join('');
-    return \`<article class="menu-card">
-      <div class="menu-card-head"><h3>\${escapeHtml(product.name)}</h3><strong>\${money(product.price)}</strong></div>
-      \${tags ? \`<div class="badge-row">\${tags}</div>\` : ''}
-      <p><strong>Ingredientes:</strong> \${escapeHtml(product.ingredients)}</p>
-      <p><strong>Alergênicos e cuidados de preparo:</strong> \${escapeHtml(product.warnings)}</p>
-      <p><strong>Adaptações informadas:</strong> \${escapeHtml(product.adaptations || 'Não informadas')}</p>
-      \${whatsapp ? \`<a class="btn primary" href="\${whatsapp}" target="_blank" rel="noopener noreferrer">Perguntar sobre este prato →</a>\` : '<p class="note">WhatsApp do estabelecimento não informado.</p>'}
-    </article>\`;
+    return `<article class="menu-card">
+      <div class="menu-card-head"><h3>${escapeHtml(product.name)}</h3><strong>${money(product.price)}</strong></div>
+      ${tags ? `<div class="badge-row">${tags}</div>` : ''}
+      <p><strong>Ingredientes:</strong> ${escapeHtml(product.ingredients)}</p>
+      <p><strong>Alergênicos e cuidados de preparo:</strong> ${escapeHtml(product.warnings)}</p>
+      <p><strong>Adaptações informadas:</strong> ${escapeHtml(product.adaptations || 'Não informadas')}</p>
+      ${whatsapp ? `<a class="btn primary" href="${whatsapp}" target="_blank" rel="noopener noreferrer">Perguntar sobre este prato →</a>` : '<p class="note">WhatsApp do estabelecimento não informado.</p>'}
+    </article>`;
   }).join('') : '<div class="empty-state">Nenhum prato encontrado com essa busca ou esses filtros.</div>';
 }
 
@@ -64,7 +64,7 @@ if (!storeId || !config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !con
     const phone = normalizePhone(restaurant.whatsapp);
     if (phone) {
       const link = $('restaurant-whatsapp');
-      link.href = \`https://wa.me/\${phone}?text=\${encodeURIComponent(\`Olá! Encontrei o cardápio de \${restaurant.businessName} na AMEZA e gostaria de tirar uma dúvida.\`)}\`;
+      link.href = `https://wa.me/${phone}?text=${encodeURIComponent(`Olá! Encontrei o cardápio de ${restaurant.businessName} na AMEZA e gostaria de tirar uma dúvida.`)}`;
       link.hidden = false;
     }
     const result = await getDocs(query(collection(db, 'menuProducts'), where('merchantUid', '==', storeId), where('published', '==', true)));
