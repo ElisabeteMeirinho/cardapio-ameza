@@ -1,8 +1,7 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js';
-import { getFirestore, collection, doc, getDoc, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js';
-
 const $ = (id) => document.getElementById(id);
-const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[char]));
 const money = (value) => Number(value || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 const config = window.AMEZA_FIREBASE_CONFIG;
 const storeId = new URLSearchParams(location.search).get('loja');
@@ -15,13 +14,19 @@ function normalizePhone(value) {
   return digits;
 }
 
+function showUnavailable(title, message) {
+  $('restaurant-name').textContent = title;
+  $('restaurant-description').textContent = message;
+  if (productsBox) productsBox.innerHTML = '<div class="notice danger">Este cardápio não está disponível no momento.</div>';
+}
+
 function render() {
-  const term = ($('search').value || '').trim().toLocaleLowerCase('pt-BR');
+  if (!productsBox) return;
+  const term = ($('search')?.value || '').trim().toLocaleLowerCase('pt-BR');
   const selectedFilters = [...document.querySelectorAll('.filter-list input:checked')].map((input) => input.value);
   const visible = products.filter((product) => {
-    const matchesText = !term || `${product.name || ''} ${product.ingredients || ''}`.toLocaleLowerCase('pt-BR').includes(term);
-    const matchesFilters = selectedFilters.every((field) => product[field] === true);
-    return matchesText && matchesFilters;
+    const text = `${product.name || ''} ${product.ingredients || ''}`.toLocaleLowerCase('pt-BR');
+    return (!term || text.includes(term)) && selectedFilters.every((field) => product[field] === true);
   });
   $('product-count').textContent = `${visible.length} prato(s)`;
   productsBox.innerHTML = visible.length ? visible.map((product) => {
@@ -29,9 +34,9 @@ function render() {
     const message = `Olá! Encontrei o cardápio do ${window.AMEZA_RESTAURANT_NAME}. Gostaria de saber mais sobre: ${product.name}. Poderia confirmar ingredientes e cuidados de preparo?`;
     const whatsapp = phone ? `https://wa.me/${phone}?text=${encodeURIComponent(message)}` : '';
     const tags = [
-      product.milkFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-leite.webp" alt="">Declarado sem leite e derivados</span>' : '',
-      product.lactoseFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-leite.webp" alt="">Declarado sem lactose</span>' : '',
-      product.glutenFree ? '<span class="pill dietary-pill"><img src="assets/support/apoio-sem-gluten.webp" alt="">Declarado sem glúten</span>' : ''
+      product.milkFree ? '<span class="pill dietary-pill"><img src="assets/icon-no-milk.svg?v=5" alt="">Declarado sem leite e derivados</span>' : '',
+      product.lactoseFree ? '<span class="pill">Declarado sem lactose</span>' : '',
+      product.glutenFree ? '<span class="pill dietary-pill"><img src="assets/icon-ingredients.svg?v=5" alt="">Declarado sem glúten</span>' : ''
     ].filter(Boolean).join('');
     return `<article class="menu-card">
       <div class="menu-card-head"><h3>${escapeHtml(product.name)}</h3><strong>${money(product.price)}</strong></div>
@@ -44,13 +49,23 @@ function render() {
   }).join('') : '<div class="empty-state">Nenhum prato encontrado com essa busca ou esses filtros.</div>';
 }
 
-if (!storeId || !config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !config?.projectId || config.projectId.startsWith('PREENCHA_')) {
-  $('restaurant-name').textContent = 'Cardápio indisponível';
-  $('restaurant-description').textContent = 'O endereço está incompleto ou a conexão ainda não foi configurada.';
-  productsBox.innerHTML = '<div class="notice danger">Volte à lista de estabelecimentos e escolha um cardápio publicado.</div>';
+if (!productsBox) {
+  console.error('AMEZA: elemento #products não encontrado.');
+} else if (!storeId) {
+  showUnavailable('Cardápio não selecionado', 'Volte à lista de estabelecimentos e escolha um cardápio.');
+} else if (
+  !config?.apiKey || config.apiKey.startsWith('PREENCHA_') ||
+  !config?.projectId || config.projectId.startsWith('PREENCHA_')
+) {
+  showUnavailable('Cardápio em configuração', 'A conexão do Firebase ainda precisa ser configurada para publicar este cardápio.');
 } else {
+  productsBox.innerHTML = '<p class="muted">Carregando pratos…</p>';
   try {
-    const app = initializeApp(config);
+    const [{ initializeApp }, { getFirestore, collection, doc, getDoc, getDocs, query, where }] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js')
+    ]);
+    const app = initializeApp(config, 'ameza-menu-public');
     const db = getFirestore(app);
     const restaurantSnapshot = await getDoc(doc(db, 'publicRestaurants', storeId));
     if (!restaurantSnapshot.exists() || restaurantSnapshot.data().active !== true) {
@@ -68,15 +83,14 @@ if (!storeId || !config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !con
       link.hidden = false;
     }
     const result = await getDocs(query(collection(db, 'menuProducts'), where('merchantUid', '==', storeId), where('published', '==', true)));
-    products = result.docs.map((item) => ({ id: item.id, ...item.data() })).sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
+    products = result.docs.map((item) => ({ id: item.id, ...item.data() }))
+      .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
     render();
   } catch (error) {
-    console.error(error);
-    $('restaurant-name').textContent = 'Cardápio indisponível';
-    $('restaurant-description').textContent = error.message || 'Não foi possível carregar as informações.';
-    productsBox.innerHTML = '<div class="notice danger">Não foi possível carregar este cardápio. Tente novamente mais tarde.</div>';
+    console.error('AMEZA: falha ao carregar o cardápio.', error);
+    showUnavailable('Cardápio indisponível', error.message || 'Não foi possível carregar as informações.');
   }
 }
 
-$('search').addEventListener('input', render);
+$('search')?.addEventListener('input', render);
 document.querySelectorAll('.filter-list input').forEach((input) => input.addEventListener('change', render));
