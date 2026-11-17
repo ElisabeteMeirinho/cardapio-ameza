@@ -21,14 +21,19 @@ function failMessage(error) {
     'auth/user-not-found': 'Conta não encontrada. Solicite uma parceria primeiro.',
     'auth/wrong-password': 'E-mail ou senha incorretos.',
     'auth/unauthorized-domain': 'Este endereço ainda não está autorizado no Firebase Authentication.',
-    'permission-denied': 'Acesso negado. Confira se a parceria foi aprovada e se as regras do Firestore estão atualizadas.'
+    'permission-denied': 'Acesso negado. Confira se a parceria foi aprovada e se as regras do Firestore estão atualizadas.',
+    'auth/network-request-failed': 'Falha de rede ao acessar o Firebase. Verifique sua conexão.',
+    'auth/operation-not-allowed': 'O login por e-mail e senha ainda não está ativado no Firebase Authentication.',
+    'auth/unauthorized-domain': 'Este endereço ainda não está autorizado no Firebase Authentication.',
+    'unavailable': 'O Firestore está indisponível no momento. Tente novamente.'
   };
   return messages[error?.code] || error?.message || 'Ocorreu um erro inesperado.';
 }
 
 if (!config?.apiKey || config.apiKey.startsWith('PREENCHA_') || !config?.projectId || config.projectId.startsWith('PREENCHA_')) {
-  notify('A conexão com o Firebase ainda não foi configurada.', true);
-  throw new Error('Firebase não configurado');
+  $('session').textContent = 'Configuração do Firebase pendente. Preencha config.js com os dados do projeto exclusivo da AMEZA.';
+  notify('Siga as instruções em INSTRUCOES-FIREBASE.md antes de usar o painel.', true);
+  throw new Error('Firebase da AMEZA ainda não configurado');
 }
 
 const app = initializeApp(config);
@@ -52,14 +57,18 @@ $('signout').addEventListener('click', () => signOut(auth));
 
 onAuthStateChanged(auth, async (currentUser) => {
   user = currentUser;
-  show('signout', !!user);
-  show('signin', !user);
-  show('workspace', false);
   if (!user) {
+    show('signout', false);
+    show('signin', true);
+    show('workspace', false);
     $('session').textContent = 'Entre com a conta vinculada ao estabelecimento aprovado.';
+    window.dispatchEvent(new Event('ameza:operacao-ready'));
     return;
   }
-  $('session').textContent = \`Conta: \${user.email}\`;
+  show('signout', true);
+  show('signin', false);
+  show('workspace', false);
+  $('session').textContent = `Conta: ${user.email}`;
   try {
     await user.reload();
     await user.getIdToken(true);
@@ -74,7 +83,7 @@ onAuthStateChanged(auth, async (currentUser) => {
     }
     partner = application.data();
     if (partner.status !== 'approved') {
-      notify(\`Sua solicitação está com status “\${partner.status}”. O painel é liberado após aprovação.\`, true);
+      notify(`Sua solicitação está com status “${partner.status}”. O painel é liberado após aprovação.`, true);
       return;
     }
     show('workspace', true);
@@ -82,6 +91,8 @@ onAuthStateChanged(auth, async (currentUser) => {
     await refreshProducts();
   } catch (error) {
     notify(failMessage(error), true);
+  } finally {
+    window.dispatchEvent(new Event('ameza:operacao-ready'));
   }
 });
 
@@ -122,26 +133,26 @@ async function refreshProducts() {
   const snapshot = await getDocs(query(collection(db, 'menuProducts'), where('merchantUid', '==', user.uid)));
   products = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
     .sort((a, b) => String(a.name || '').localeCompare(String(b.name || ''), 'pt-BR'));
-  $('product-total').textContent = \`\${products.length} prato(s)\`;
-  $('products').innerHTML = products.length ? products.map((product) => \`
+  $('product-total').textContent = `${products.length} prato(s)`;
+  $('products').innerHTML = products.length ? products.map((product) => `
     <article class="product-admin">
       <div class="product-admin-main">
-        <div class="topline"><h3>\${escapeHtml(product.name)}</h3><span class="price">\${money(product.price)}</span></div>
-        <p>\${escapeHtml(product.ingredients)}</p>
-        <p class="note">\${escapeHtml(product.warnings)}</p>
+        <div class="topline"><h3>${escapeHtml(product.name)}</h3><span class="price">${money(product.price)}</span></div>
+        <p>${escapeHtml(product.ingredients)}</p>
+        <p class="note">${escapeHtml(product.warnings)}</p>
         <div class="badge-row">
-          \${product.milkFree ? '<span class="pill">Sem leite declarado</span>' : ''}
-          \${product.lactoseFree ? '<span class="pill">Sem lactose declarado</span>' : ''}
-          \${product.glutenFree ? '<span class="pill">Sem glúten declarado</span>' : ''}
-          <span class="pill \${product.published ? '' : 'warn'}">\${product.published ? 'Publicado' : 'Rascunho'}</span>
+          ${product.milkFree ? '<span class="pill">Sem leite declarado</span>' : ''}
+          ${product.lactoseFree ? '<span class="pill">Sem lactose declarado</span>' : ''}
+          ${product.glutenFree ? '<span class="pill">Sem glúten declarado</span>' : ''}
+          <span class="pill ${product.published ? '' : 'warn'}">${product.published ? 'Publicado' : 'Rascunho'}</span>
         </div>
       </div>
       <div class="actions">
-        <button type="button" class="secondary" data-action="edit" data-id="\${product.id}">Editar</button>
-        <button type="button" class="secondary" data-action="toggle" data-id="\${product.id}">\${product.published ? 'Ocultar' : 'Publicar'}</button>
-        <button type="button" class="danger" data-action="delete" data-id="\${product.id}">Excluir</button>
+        <button type="button" class="secondary" data-action="edit" data-id="${product.id}">Editar</button>
+        <button type="button" class="secondary" data-action="toggle" data-id="${product.id}">${product.published ? 'Ocultar' : 'Publicar'}</button>
+        <button type="button" class="danger" data-action="delete" data-id="${product.id}">Excluir</button>
       </div>
-    </article>\`).join('') : '<p class="muted">Você ainda não cadastrou pratos. Use o formulário abaixo para começar.</p>';
+    </article>`).join('') : '<p class="muted">Você ainda não cadastrou pratos. Use o formulário abaixo para começar.</p>';
 }
 
 function resetForm() {
@@ -219,7 +230,7 @@ $('products').addEventListener('click', async (event) => {
   if (!product) return;
   const action = button.dataset.action;
   if (action === 'edit') return startEdit(product);
-  if (action === 'delete' && !confirm(\`Excluir o prato “\${product.name}”? \`)) return;
+  if (action === 'delete' && !confirm(`Excluir o prato “${product.name}”? `)) return;
   button.disabled = true;
   try {
     if (action === 'toggle') {
