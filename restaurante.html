@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="operacao.css">
   <script src="config.js"></script>
   <script defer src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-  <script type="module" src="operacao.js"></script>
+  <script defer src="operacao-loader.js"></script>
   <link rel="icon" href="/cardapio-ameza/assets/ameza-simbolo-oficial.png?v=3" type="image/png">
   <link rel="stylesheet" href="brand.css?v=13">
   <!-- AMEZA visual cache refresh 2026-11-16 -->
@@ -20,9 +20,10 @@
   <main>
     <section class="hero"><div class="eyebrow">ÁREA DO RESTAURANTE</div><h1>Seu cardápio, do seu jeito.</h1><p>Cadastre os pratos, informe os ingredientes e publique as opções que deseja mostrar aos consumidores.</p></section>
     <div class="warning">Versão inicial em piloto. As informações são declarações do estabelecimento, não uma certificação. Antes de divulgar, revise ingredientes, alergênicos, preparo e contato cruzado.</div>
+    <div id="setup" class="alert error hidden" role="alert">A configuração do Firebase da AMEZA está pendente. Siga as <a href="INSTRUCOES-FIREBASE.md" target="_blank" rel="noopener noreferrer">instruções de configuração</a>.</div>
     <section class="panel">
       <h2>Acesso do restaurante</h2>
-      <p id="session" class="muted">Conectando…</p>
+      <p id="session" class="muted" role="status" aria-live="polite">Verificando a configuração do Firebase…</p>
       <form id="signin"><div class="grid"><div class="field"><label>E-mail<input name="email" type="email" autocomplete="username" required></label></div><div class="field"><label>Senha<input name="password" type="password" autocomplete="current-password" required></label></div></div><button type="submit">Entrar</button></form>
       <button id="signout" class="secondary hidden" type="button">Sair</button>
       <p id="notice" aria-live="polite"></p>
